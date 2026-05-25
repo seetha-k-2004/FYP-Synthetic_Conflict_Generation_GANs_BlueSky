@@ -8,7 +8,7 @@
 
 ---
 
-This repository contains the codebase for the **Final Year Project: Synthetic Conflict Generation Using GANs and BlueSky Simulator**. The goal is to artificially generate realistic air traffic conflict scenarios using Generative Adversarial Networks (GANs), simulate them in the BlueSky air traffic simulator, and facilitate advanced research on conflict detection and resolution algorithms for the aviation industry.
+This repository contains the codebase for the **Final Year Project: Synthetic Conflict Generation Using GANs and BlueSky Simulator**. The goal is to artificially generate realistic air traffic conflict scenarios using deep learning and integrate them with BlueSky for simulation and evaluation.
 
 ---
 
@@ -30,7 +30,7 @@ This repository contains the codebase for the **Final Year Project: Synthetic Co
 
 ## Project Overview
 
-Conflict detection and resolution are critical components of air traffic management, ensuring safety and efficiency in the skies. This project leverages GANs, a deep learning framework, to generate synthetic but realistic air traffic conflict scenarios. These scenarios are then simulated using the [BlueSky ATM simulator](https://github.com/TUDelft-CNS-ATM/bluesky), a widely used open-source platform for air traffic management research.
+Conflict detection and resolution are critical components of air traffic management, ensuring safety and efficiency in the skies. This project leverages GANs, a deep learning framework, to generate synthetic conflict scenarios for benchmarking and advancing conflict detection and resolution algorithms.
 
 **Objectives:**
 - Develop a GAN model capable of generating plausible air traffic conflicts.
@@ -52,7 +52,7 @@ Conflict detection and resolution are critical components of air traffic managem
 
 ### Model Architecture
 
-- **Generator:** The generator is designed as a multilayer perceptron (MLP) that receives a noise vector and outputs features representing aircraft states and conflict attributes (e.g., position, heading, speed, altitude, time-to-conflict, etc.).
+- **Generator:** The generator is designed as a multilayer perceptron (MLP) that receives a noise vector and outputs features representing aircraft states and conflict attributes (e.g., position, heading, speed).
 - **Discriminator:** An MLP discriminator takes real or generated scenarios and classifies them as real or fake, learning the distribution of genuine conflict data.
 - **Training:** The GAN is trained using a dataset of real conflict scenarios, optimizing the adversarial loss until the generator produces scenarios indistinguishable from real samples.
 
@@ -96,23 +96,24 @@ cd FYP-Synthetic_Conflict_Generation_GANs_BlueSky
 
 ### 2. Download or Prepare Datasets
 
-Place your raw or processed datasets in the `data/` directory. Scripts for preprocessing and formatting are provided.
+Place your raw or processed datasets and scenario files in the appropriate folders (see Project Structure section). Scripts for preprocessing and formatting are provided.
 
-### 3. Train the GAN Model
+### 3. Run the GAN Model or Utilities
 
-```bash
-python train_gan.py --config configs/gan_config.yaml
-```
-
-### 4. Generate New Scenarios
+Examples:
 
 ```bash
-python generate_scenarios.py --num-scenarios 100 --output generated/
+python GAN_model.py
+python generate_attempt2_conflicts.py
+python create_master_batches.py
+python collect_gan_scn_files.py
 ```
 
-### 5. Simulate in BlueSky
+Refer to the source code for argument options and detailed usage.
 
-Open BlueSky, and use the integration scripts to run generated scenarios. More instructions are in the `bluesky_integration/README.md`.
+### 4. Use with BlueSky Simulator
+
+Generated scenarios can be placed or referenced in BlueSky for further analysis or visualization.
 
 ---
 
@@ -120,24 +121,36 @@ Open BlueSky, and use the integration scripts to run generated scenarios. More i
 
 ```
 FYP-Synthetic_Conflict_Generation_GANs_BlueSky/
-├── bluesky_integration/
-├── data/
-├── models/
-├── notebooks/
-├── results/
-├── configs/
-├── requirements.txt
-├── train_gan.py
-├── generate_scenarios.py
-└── README.md
+├── Trajectory SCN files/
+├── log files/
+├── .DS_Store
+├── GAN_model.py
+├── README.md
+├── collect_gan_scn_files.py
+├── create_master_batches.py
+├── find_2d_intersections.py
+├── gan_output_1.zip
+├── gan_output_2.zip
+├── gan_output_3.zip
+├── generate_attempt2_conflicts.py
+├── move_rif_logs.py
+├── point_intersections.zip
+├── production_transformer_pipeline.py
 ```
 
-- **bluesky_integration/**: Scripts to interface with BlueSky.
-- **data/**: Datasets for training and testing.
-- **models/**: Model architecture and training scripts.
-- **notebooks/**: Experiments, EDA, and analysis.
-- **results/**: Outputs, images, and evaluation metrics.
-- **configs/**: Configuration files.
+- **Trajectory SCN files/**: Contains scenario files related to aircraft trajectories.
+- **log files/**: Contains log outputs from script executions or simulations.
+- **GAN_model.py**: Main GAN model implementation.
+- **collect_gan_scn_files.py**: Script to collect scenario files generated by GAN.
+- **create_master_batches.py**: Script for batch processing/creation.
+- **find_2d_intersections.py**: Script for finding 2D intersections in scenarios.
+- **gan_output_*.zip**: Sample outputs from the GAN.
+- **generate_attempt2_conflicts.py**: Conflict scenario generation attempt script.
+- **move_rif_logs.py**: Script for moving log files.
+- **point_intersections.zip**: Zipped data for intersection points.
+- **production_transformer_pipeline.py**: Transformer-based pipeline script.
+- **README.md**: This documentation.
+
 ---
 
 ## Contributing
