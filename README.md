@@ -1,5 +1,4 @@
 # FYP-Synthetic-Conflict-Generation-Using-GANs-and-BlueSky-Simulator
-# Synthetic Conflict Generation Using GANs and BlueSky Simulator
 
 **Final Year Project**  
 **Author:** Seetha Kumara Swamy  
